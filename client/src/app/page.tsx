@@ -13,7 +13,7 @@ export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [endpoint, setEndpoint] = useState('/simple-chat'); // Default to simple-chat
+  const [endpoint, setEndpoint] = useState('/chat'); // Default to simple-chat
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -67,7 +67,6 @@ export default function Home() {
         buffer = lines.pop() || '';
         
         for (const line of lines) {
-          console.log('SSE Line:', line);
           if (line.trim().startsWith('data: ')) {
             const data = line.trim().slice(6);
             if (data && data !== '[DONE]') {
@@ -152,16 +151,7 @@ export default function Home() {
     <div className="flex flex-col h-screen bg-white dark:bg-gray-900">
       <div className="flex-shrink-0 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
         <div className="max-w-3xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">ChatGPT Clone</h1>
-          <select 
-            value={endpoint} 
-            onChange={(e) => setEndpoint(e.target.value)}
-            className="px-3 py-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-          >
-            <option value="/simple-chat">Simple Chat (Direct LangChain)</option>
-            <option value="/chat">LangGraph Chat</option>
-            <option value="/test-chat">Test Echo</option>
-          </select>
+          <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Agent</h1>
         </div>
       </div>
 
